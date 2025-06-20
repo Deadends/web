@@ -1,0 +1,21 @@
+name: Deploy Preswald App
+
+on:
+  push:
+    branches:
+      - main  # or whichever branch you're using
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./web   # or ./dist, whichever contains your index.html
+      - name: Post Deployment Message
+        run: echo "Deployment to GitHub Pages completed successfully!"
